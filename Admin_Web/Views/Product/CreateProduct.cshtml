@@ -1,0 +1,136 @@
+﻿@model Data_Access_Layer.Models.SneatProduct.Product
+
+@{
+    ViewData["Title"] = "AddProduct | Sneat";
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 500px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .text-danger {
+        color: #dc3545;
+    }
+</style>
+
+<script>
+    // You can add JS scripts here if needed
+</script>
+
+<div class="container">
+    <h2>Add Product</h2>
+    <br />
+    <form asp-action="CreateProduct" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+
+
+        <div class="form-group">
+            <label asp-for="CategoryId" class="control-label">Choose Category</label>
+            <select asp-for="@Model.CategoryId" class="form-control">
+                @foreach (var i in ViewBag.category)
+                {
+                    <option value="@i.Id">@i.CategoryName</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Available" class="control-label">Available</label>
+            <input class="form-check-input" type="checkbox" asp-for="Available" />
+        </div>
+
+        <div class="form-group">
+            <label>Product Name</label>
+            <input type="text" asp-for="ProductName" class="form-control" />
+            <span asp-validation-for="ProductName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Product Price</label>
+            <input type="text" asp-for="ProductPrice" class="form-control" />
+            <span asp-validation-for="ProductPrice" class="text-danger"></span>
+        </div>
+
+@*         <div class="form-group">
+            <label>Product Image</label>
+            <input type="file" asp-for="File" class="form-control" />
+            <span asp-validation-for="File" class="text-danger"></span>
+        </div> *@
+
+        <div class="form-group">
+            <label>Product Image</label>
+            <input type="file" multiple asp-for="MultiImage" class="form-control" />
+            <span asp-validation-for="MultiImage" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IsOffer" class="control-label">Is Offer</label>
+            <input class="form-check-input" type="checkbox" asp-for="IsOffer" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="OfferPrice" class="control-label">Offer Price</label>
+            <input asp-for="OfferPrice" class="form-control" />
+            <span asp-validation-for="OfferPrice" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ProductDescription" class="control-label">Product Description</label>
+            <textarea asp-for="ProductDescription" class="form-control"></textarea>
+            <span asp-validation-for="ProductDescription" class="text-danger"></span>
+        </div>
+
+        <p style="color:darkturquoise">@ViewBag.response</p>
+
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+    <br />
+    <div>
+        <a asp-action="ListProduct">Back to List</a>
+    </div>
+</div>

@@ -1,0 +1,217 @@
+﻿@* @model IEnumerable<Data_Access_Layer.Models.SneatProduct.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="CreateProduct">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Available)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.File)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOffer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OfferPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Available)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    <img src="~/productuploads/@item.File" alt="Image" width="100" height="100" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsOffer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OfferPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductDescription)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> *@
+
+
+@model IEnumerable<Data_Access_Layer.Models.SneatProduct.Product>
+
+@{
+    ViewData["Title"] = "Product | Sneat";
+}
+
+<style>
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .table-container {
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table img {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 5px;
+        }
+
+    .btn-actions {
+        display:grid;
+        gap: 5px;
+    }
+
+</style>
+
+<h1>Product List</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="CreateProduct">Add New Product</a>
+</p>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Category Name</th>
+                <th>Available</th>
+                <th>Product Name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Offer</th>
+                <th>Offer Price</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Category.CategoryName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Available)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                    <td>
+                        <img src="~/productuploads/@item.File" alt="Product Image" />
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IsOffer)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OfferPrice)</td>
+
+
+                     <td>
+                        @{
+                            var truncatedDescription = item.ProductDescription.Length > 50
+                            ? item.ProductDescription.Substring(0, Math.Min(50, item.ProductDescription.Length)) + "..."
+                            : item.ProductDescription;
+                        }
+                        <span class="truncated-description" data-bs-toggle="modal" data-bs-target="#descriptionModal" data-full-description="@item.ProductDescription">@truncatedDescription</span>
+                    </td>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="descriptionModalLabel">Full Description</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p id="fullDescription"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <td class="btn-actions">
+                        <a class="btn btn-info" asp-action="DetailProduct" asp-route-id="@item.Id">Details</a>
+                        <a class="btn btn-warning" asp-action="EditProduct" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-danger" asp-action="DeleteProduct" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var descriptions = document.querySelectorAll(".truncated-description");
+
+        descriptions.forEach(function (description) {
+            var fullDescription = description.dataset.fullDescription;
+
+            description.addEventListener("mouseover", function () {
+                document.getElementById("fullDescription").textContent = fullDescription;
+            });
+        });
+    });
+</script>
+

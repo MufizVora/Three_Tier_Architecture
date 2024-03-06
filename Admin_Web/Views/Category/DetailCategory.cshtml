@@ -1,0 +1,107 @@
+﻿@model Data_Access_Layer.Models.SneatCategory.Category
+
+@{
+    ViewData["Title"] = "DetailCategory | Sneat";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+
+        h1 {
+            color: #343a40;
+        }
+
+        .category-details {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+            .category-details h4 {
+                color: #007bff;
+                margin-top: 0;
+            }
+
+            .category-details hr {
+                border-color: #dee2e6;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .category-details .row {
+                margin-bottom: 0;
+            }
+
+            .category-details dt {
+                font-weight: bold;
+                color: #6c757d;
+            }
+
+            .category-details img {
+                border-radius: 5px;
+            }
+
+        .edit-buttons {
+            margin-top: 20px;
+        }
+
+            .edit-buttons a {
+                color: #007bff;
+                text-decoration: none;
+                margin-right: 10px;
+            }
+
+                .edit-buttons a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Detail Category</h1>
+        <div class="category-details">
+            <hr>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Name
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CategoryName)
+                </dd>
+                <br />
+                <br />
+                <dt class="col-sm-2">
+                    Image
+                </dt>
+                <dd class="col-sm-10">
+                    <img src="~/categoryuploads/@Model.File" alt="Image" width="100" height="100">
+                </dd>
+            </dl>
+        </div>
+        <div class="edit-buttons">
+            <a asp-action="EditCategory" asp-route-id="@Model?.Id">
+                <i class="bi bi-cloud-upload"></i>
+                Edit
+            </a>
+            <a asp-action="ListCategory">Back to List</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html>

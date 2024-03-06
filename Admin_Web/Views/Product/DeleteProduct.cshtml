@@ -1,0 +1,151 @@
+﻿@model Data_Access_Layer.Models.SneatProduct.Product
+
+@{
+    ViewData["Title"] = "DeleteProduct | Sneat";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Delete Product</h1>
+        <h3>Are you sure you want to delete this?</h3>
+        <div>
+            <hr />
+            <dl class="row">
+@*                 <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Category)
+                </dt>
+                <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Category.CategoryName)
+                </dd> *@
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Available)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Available)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ProductName)
+                </dd>
+                <dt class="col-sm-2">
+                    Image
+                </dt>
+                <dd class="col-sm-10">
+                    <img src="~/productuploads/@Model.File" alt="Image" width="100" height="100" />
+                </dd>
+                <dt class="col-sm-10">
+                    @Html.DisplayNameFor(model => model.MultiImage)
+                </dt>
+                <dd>
+                    @if (Model.MultiImage != null)
+                    {
+                        <div class="image-gallery">
+                            <div class="row">
+                                @foreach (var item in Model.MultiImage.Split(","))
+                                {
+                                    if (!string.IsNullOrEmpty(item))
+                                    {
+                                        <div class="col-sm-3">
+                                            <img src="~/productuploads/@item" alt="Product Image" class="img-fluid" />
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    }
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ProductPrice)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ProductPrice)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.IsOffer)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.IsOffer)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.OfferPrice)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.OfferPrice)
+                </dd>
+                <dt class="col-sm-2">
+                    Description
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ProductDescription)
+                </dd>
+            </dl>
+
+            <form asp-action="DeleteProduct">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                <a href="#" class="back-link" onclick="history.back()">Back to List</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
