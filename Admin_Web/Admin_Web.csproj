@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\User_Web\Controllers\" />
     <Folder Include="Areas\User_Web\Data\" />
     <Folder Include="Areas\User_Web\Models\" />
     <Folder Include="wwwroot\categoryuploads\" />
