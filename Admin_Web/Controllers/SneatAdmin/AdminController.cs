@@ -113,7 +113,7 @@ namespace Admin_Web.Controllers.SneatAdmin
             var response = await _adminInterface.ForgotPassword(email);
             if (response == "Password reset link sent successfully")
             {
-                return RedirectToAction("Password", "Admin");
+                return RedirectToAction("ResetPassword", "Admin");
             }
             ViewBag.Message = response;
             return View();
