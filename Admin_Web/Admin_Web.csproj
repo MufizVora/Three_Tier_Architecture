@@ -15,6 +15,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
   </ItemGroup>
 
@@ -24,7 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\User_Web\Controllers\" />
+    <Folder Include="Areas\User_Web\Data\" />
+    <Folder Include="Areas\User_Web\Models\" />
     <Folder Include="wwwroot\categoryuploads\" />
+    <Folder Include="wwwroot\userassets\" />
     <Folder Include="wwwroot\productuploads\" />
   </ItemGroup>
 
