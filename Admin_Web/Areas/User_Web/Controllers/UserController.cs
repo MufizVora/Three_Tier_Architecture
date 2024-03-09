@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Admin_Web.Areas.User_Web.Controllers
 {
+    [Area("User_Web")]
     public class UserController(Context context) : Controller
     {
-        [Area("User_Web")]
-
         [HttpGet]
         public IActionResult Index()
         {
