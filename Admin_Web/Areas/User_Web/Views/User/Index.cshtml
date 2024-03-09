@@ -67,7 +67,7 @@
     }
 
 </style>
-
+<!-- Banner Section Start -->
 <section class="banner spad">
     <div class="container">
         <div class="row">
@@ -83,7 +83,7 @@
                         </div>
                         <div class="banner__item__text">
                             <h5>@category.CategoryName</h5>
-                            <a href="#" class="btn btn-primary mt-2">Shop now</a>
+                            <a href="@Url.Action("CategoryWiseProduct", "User", new { categoryId = category.Id })" class="btn btn-primary mt-2">Shop now</a>
                         </div>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
                             <ul class="product__hover">
                                 <li><a href="#"><img src="/userassets/img/icon/heart.png" alt=""></a></li>
                                 <li><a href="#"><img src="/userassets/img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-                                <li><a href="/User/ProductDetail"><img src="/userassets/img/icon/search.png" alt=""></a></li>
+                                <li><a href="/User_Web/Pages/Index?slug=@product.Slug"><img src="/userassets/img/icon/search.png" alt=""></a></li>
                             </ul>
                         </div>
                         <div class="product__item__text">

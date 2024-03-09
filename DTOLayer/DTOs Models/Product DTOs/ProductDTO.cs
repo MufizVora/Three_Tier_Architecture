@@ -32,5 +32,7 @@ namespace DTOLayer.DTOs_Models.Product_DTOs
 
         public string? MultiImage { get; set; }
 
+        public string? Slug { get; set; }
+
     }
 }

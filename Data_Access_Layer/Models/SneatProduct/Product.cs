@@ -37,6 +37,8 @@ namespace Data_Access_Layer.Models.SneatProduct
 
         public string? MultiImage { get; set; }
 
+        public string? Slug { get; set; }
+
         public Category Category { get; set; }
 
     }

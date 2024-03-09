@@ -26,6 +26,23 @@
     <link rel="stylesheet" href="~/userassets/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="~/userassets/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/userassets/css/style.css" type="text/css">
+    
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    
+    <style>
+        /* Additional CSS for image container */
+        .image-container {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 5px;
+        }
+        /* Additional CSS for margin between single and multiple images */
+        .single-image {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -145,61 +162,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-3">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="/userassets/img/shop-details/thumb-1.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="/userassets/img/shop-details/thumb-2.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="/userassets/img/shop-details/thumb-3.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="/userassets/img/shop-details/thumb-4.png">
-                                        <i class="fa fa-play"></i>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-6 col-md-9">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="/userassets/img/shop-details/product-big-2.png" alt="">
+                <!-- Single Image Display -->
+                <div class="single-image">
+                    <img id="singleImage" src="/productuploads/@ViewBag.File" alt="Single Image" height="200" width="200">
+                </div>
+
+                <!-- Multiple Image Display with Owl Carousel -->
+                <div class="owl-carousel">
+                    @foreach (var image in ViewBag.MultiImage)
+                    {
+                        if (!string.IsNullOrEmpty(image))
+                        {
+                            <div class="item">
+                                <div class="image-container">
+                                    <img class="img-fluid mb-3 multi-img" src="/productuploads/@image" alt="Multiple Image">
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tabs-2" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="/userassets/img/shop-details/product-big-3.png" alt="">
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="/userassets/img/shop-details/product-big.png" alt="">
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-4" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="/userassets/img/shop-details/product-big-4.png" alt="">
-                                    <a href="https://www.youtube.com/watch?v=8PJ3_p7VqHw&list=RD8PJ3_p7VqHw&start_radio=1" class="video-popup"><i class="fa fa-play"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        }
+                    }
                 </div>
             </div>
         </div>
@@ -208,7 +188,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                         <div class="product__details__text">
-                            <h4>Hooded thermal anorak</h4>
+                            <h4>Name:@ViewBag.ProductName</h4>
                             <div class="rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -217,11 +197,9 @@
                                 <i class="fa fa-star-o"></i>
                                 <span> - 5 Reviews</span>
                             </div>
-                            <h3>$270.00 <span>70.00</span></h3>
+                            <h3>Price:₹@ViewBag.ProductPrice <span>OfferPrice:₹@ViewBag.OfferPrice</span></h3>
                             <p>
-                                Coat with quilted lining and an adjustable hood. Featuring long sleeves with adjustable
-                                cuff tabs, adjustable asymmetric hem with elastic side tabs and a front zip fastening
-                                with placket.
+                                Description:@ViewBag.ProductDescription
                             </p>
                             <div class="product__details__option">
                                 <div class="product__details__option__size">
@@ -675,6 +653,32 @@
     <script src="~/userassets/js/mixitup.min.js"></script>
     <script src="~/userassets/js/owl.carousel.min.js"></script>
     <script src="~/userassets/js/main.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Owl Carousel JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 4
+                    }
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>
